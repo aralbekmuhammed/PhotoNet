@@ -13,6 +13,7 @@ protocol GalleryPresenterProtocol: AnyObject{
     var interactor: GalleryInteractorProtocol! {get set}
     var router: GalleryRouterProtocol! {get set}
     
+    func collectionViewDidPull()
     func willDisplayCell(at indexPath: IndexPath)
     func didTapSearch(with text: String)
     func unsplashPhoto(for indexPath: IndexPath)->UnsplashPhoto
@@ -51,7 +52,15 @@ class GalleryPresenter: GalleryPresenterProtocol{
         if !text.isEmpty {
             interactor.getSearchedPhotos(text)
         }else{
-            interactor.getRandomPictures()
+            interactor.getRandomPictures(completionHandler: nil)
+        }
+    }
+    
+    func collectionViewDidPull() {
+        interactor.getRandomPictures { [weak self] _ in
+            guard let self = self else{return}
+            self.view.dismissRefreshControl()
+            self.view.setSearchTFText(to: nil)
         }
     }
     
@@ -70,6 +79,6 @@ class GalleryPresenter: GalleryPresenterProtocol{
     
     func configureView() {
         view.configureView()
-        interactor.getRandomPictures()
+        interactor.getRandomPictures(completionHandler: nil)
     }
 }

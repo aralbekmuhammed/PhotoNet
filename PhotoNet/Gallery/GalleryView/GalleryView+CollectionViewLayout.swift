@@ -14,9 +14,9 @@ extension GalleryView: UICollectionViewDelegateFlowLayout{
         25
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 60,
-                     left: 25,
-                     bottom: 25,
-                     right: 25)
+        return UIEdgeInsets(top: 10,
+                            left: 25,
+                            bottom: 25,
+                            right: 25)
     }
 }

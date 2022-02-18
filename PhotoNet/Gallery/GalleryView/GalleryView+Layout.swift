@@ -7,7 +7,7 @@ extension GalleryView{
         view.addSubview(searchTF)
         searchTF.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            searchTF.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            searchTF.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             searchTF.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
             searchTF.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -25),
             searchTF.heightAnchor.constraint(equalToConstant: 35),

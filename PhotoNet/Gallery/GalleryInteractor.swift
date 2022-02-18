@@ -15,7 +15,7 @@ protocol GalleryInteractorProtocol: AnyObject{
     func collectionView(numberOfItemsInSection section: Int) -> Int
     func unsplashPhoto(for indexPath: IndexPath)->UnsplashPhoto
     func getSearchedPhotos(_ searchText: String)
-    func getRandomPictures()
+    func getRandomPictures(completionHandler: (([UnsplashPhoto])->())?)
 }
 class GalleryInteractor: GalleryInteractorProtocol{
     
@@ -51,7 +51,7 @@ class GalleryInteractor: GalleryInteractorProtocol{
         }
     }
     
-    func getRandomPictures() {
+    func getRandomPictures(completionHandler: (([UnsplashPhoto])->())?) {
         self.searchText = nil
         currentPage = 1
         self.photos = []
@@ -60,6 +60,7 @@ class GalleryInteractor: GalleryInteractorProtocol{
             guard let self = self else{return}
             self.photos = photos ?? []
             self.presenter.updateCollection(withNewItems: photos ?? [])
+            completionHandler?(self.photos)
         }
     }
     
