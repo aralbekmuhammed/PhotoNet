@@ -14,7 +14,7 @@ protocol GalleryPresenterProtocol: AnyObject{
     var router: GalleryRouterProtocol! {get set}
     
     func willDisplayCell(at indexPath: IndexPath)
-    func didTapSearch(with text: String?)
+    func didTapSearch(with text: String)
     func unsplashPhoto(for indexPath: IndexPath)->UnsplashPhoto
     func configureView()
     func collectionView(numberOfItemsInSection section: Int) -> Int
@@ -47,8 +47,8 @@ class GalleryPresenter: GalleryPresenterProtocol{
         router.presentAboutVC(aboutVC)
     }
     
-    func didTapSearch(with text: String?) {
-        if let text = text {
+    func didTapSearch(with text: String) {
+        if !text.isEmpty {
             interactor.getSearchedPhotos(text)
         }else{
             interactor.getRandomPictures()
