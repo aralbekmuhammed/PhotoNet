@@ -32,6 +32,8 @@ class GalleryPresenter: GalleryPresenterProtocol{
     }
     
     func updateCollection(withNewItems newItems: [UnsplashPhoto]) {
+        spinner.dismiss()
+        
         let newPhotosCount = newItems.count
         let startIndex = interactor.photos.count - newPhotosCount
         let endIndex = startIndex + newPhotosCount
@@ -49,6 +51,7 @@ class GalleryPresenter: GalleryPresenterProtocol{
     }
     
     func didTapSearch(with text: String) {
+        spinner.show(in: view.view)
         if !text.isEmpty {
             interactor.getSearchedPhotos(text)
         }else{
@@ -79,6 +82,7 @@ class GalleryPresenter: GalleryPresenterProtocol{
     
     func configureView() {
         view.configureView()
+        spinner.show(in: view.view)
         interactor.getRandomPictures(completionHandler: nil)
     }
 }

@@ -54,7 +54,8 @@ class FavouriteTVC: UITableViewCell {
     }
     
     func configure(with unsplashPhoto: UnsplashPhoto){
-        photoView.setImageByURL(unsplashPhoto.urls.thumb)
+        let thumbnail = unsplashPhoto.urls.thumb
+        photoView.sd_setImage(with: URL(string: thumbnail))
         autorNameLabel.text = unsplashPhoto.user.name
     }
     

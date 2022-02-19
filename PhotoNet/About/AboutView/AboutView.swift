@@ -6,19 +6,13 @@
 //
 
 import UIKit
-
+import SDWebImage
 protocol AboutViewProtocol: UIViewController{
     var presenter: AboutPresenterProtocol! {get set}
     var configurator: AboutConfiguratorProtocol {get}
     var id: String{get}
-    var imageView: UIImageView{get set}
-    var authorNameLabel: UILabel{get set}
-    var dateCreatedLabel: UILabel{get set}
-    var locationLabel: UILabel{get set}
-    var downloadsLabel: UILabel{get set}
-    var likeButton: UIButton{get set}
-    var isLiked: Bool {get set}
     var likeListDelegate: LikeEditingDelegate? {get set}
+    var isLiked: Bool {get set}
     
     func configureView()
     func setImageViewImage(toLink link: String)
@@ -104,7 +98,6 @@ class AboutView: UIViewController, AboutViewProtocol{
         super.viewDidLoad()
         configurator.configure(vc: self)
         presenter.configureView()
-        
     }
     
     init(id: String){
@@ -112,7 +105,7 @@ class AboutView: UIViewController, AboutViewProtocol{
         super.init(nibName: nil, bundle: nil)
     }
     func setImageViewImage(toLink link: String){
-        imageView.setImageByURL(link)
+        imageView.sd_setImage(with: URL(string: link))
     }
     
     func setAuthorName(to name: String){

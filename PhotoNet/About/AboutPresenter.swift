@@ -27,14 +27,18 @@ class AboutPresenter: AboutPresenterProtocol{
     
     func configureView() {
         view.configureView()
+        spinner.show(in: view.view)
         interactor.getInformation(by: view.id) { [weak self] photo in
+            spinner.dismiss()
             guard let self = self,
                   let photo = photo else{return}
-            self.view.setImageViewImage(toLink: photo.urls.regular)
-            self.view.setAuthorName(to: photo.user.name)
-            self.view.setDateLabel(to: String(photo.created_at.prefix(10)))
-            self.view.setLocationLabel(to: photo.location?.title)
-            self.view.setDownloads(to: photo.downloads)
+            self.view.do {
+                $0.setImageViewImage(toLink: photo.urls.regular)
+                $0.setAuthorName(to: photo.user.name)
+                $0.setDateLabel(to: String(photo.created_at.prefix(10)))
+                $0.setLocationLabel(to: photo.location?.title)
+                $0.setDownloads(to: photo.downloads)
+            }
         }
         let isLiked = interactor.checkIfDatabaseContains(id: view.id)
         view.isLiked = isLiked
@@ -42,15 +46,18 @@ class AboutPresenter: AboutPresenterProtocol{
     }
     
     func likeButtonTapped() {
+        spinner.show(in: view.view)
         let isLiked = interactor.checkIfDatabaseContains(id: view.id)
         if isLiked{
             // should dislike
             interactor.dislike(id: view.id)
             view.isLiked = interactor.checkIfDatabaseContains(id: view.id)
             self.view.likeListDelegate?.likeListEdited()
+            spinner.dismiss()
         }else{
             // should like
             interactor.like(id: view.id) { [weak self] in
+                spinner.dismiss()
                 guard let self = self else{return}
                 self.view.isLiked = self.interactor.checkIfDatabaseContains(id: self.view.id)
                 self.view.likeListDelegate?.likeListEdited()

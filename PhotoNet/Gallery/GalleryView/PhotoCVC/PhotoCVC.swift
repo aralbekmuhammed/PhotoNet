@@ -54,6 +54,7 @@ class PhotoCVC: UICollectionViewCell {
     func configure(with unsplashPhoto: UnsplashPhoto, shouldShowAutorLabel: Bool = true){
         autorLabel.isHidden = !shouldShowAutorLabel
         autorLabel.text = unsplashPhoto.user.name
-        imageView.setImageByURL(unsplashPhoto.urls.thumb)
+        let thumb = unsplashPhoto.urls.thumb
+        imageView.sd_setImage(with: URL(string: thumb))
     }
 }

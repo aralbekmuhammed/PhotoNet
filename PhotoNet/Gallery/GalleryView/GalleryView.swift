@@ -16,7 +16,6 @@ protocol GalleryViewProtocol: UIViewController{
     func configureView()
     func dismissRefreshControl()
     func setSearchTFText(to text: String?)
-
 }
 class GalleryView: UIViewController, GalleryViewProtocol{
     var presenter: GalleryPresenterProtocol!
@@ -27,9 +26,7 @@ class GalleryView: UIViewController, GalleryViewProtocol{
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
         cv.delegate = self
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(didPullCollectionView), for: .valueChanged)
-        cv.refreshControl = refreshControl
+        cv.addRefreshControl(selector: #selector(didPullCollectionView))
         cv.dataSource = self
         cv.keyboardDismissMode = .interactive
         cv.register(PhotoCVC.self, forCellWithReuseIdentifier: "PhotoCVC")
@@ -49,12 +46,15 @@ class GalleryView: UIViewController, GalleryViewProtocol{
         configurator.configure(vc: self)
         presenter.configureView()
     }
+        
     @objc func didPullCollectionView(){
         presenter.collectionViewDidPull()
     }
+    
     func setSearchTFText(to text: String?) {
         searchTF.text = text
     }
+    
     func dismissRefreshControl() {
         collectionView.refreshControl?.endRefreshing()
     }
