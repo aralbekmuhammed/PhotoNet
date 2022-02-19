@@ -15,9 +15,9 @@ protocol AboutPresenterProtocol: AnyObject{
     
     func likeButtonTapped()
     func configureView()
-    
+    func downloadButtonTapped()
 }
-class AboutPresenter: AboutPresenterProtocol{
+class AboutPresenter: NSObject, AboutPresenterProtocol{
     
     weak var view: AboutViewProtocol!
     
@@ -38,12 +38,30 @@ class AboutPresenter: AboutPresenterProtocol{
                 $0.setDateLabel(to: String(photo.created_at.prefix(10)))
                 $0.setLocationLabel(to: photo.location?.title)
                 $0.setDownloads(to: photo.downloads)
-                $0.setDescriptionLabel(to: photo.description)
+                $0.setDescriptionLabel(to: photo.description ?? photo.alt_description)
             }
         }
         let isLiked = interactor.checkIfDatabaseContains(id: view.id)
         view.isLiked = isLiked
         
+    }
+    
+    func downloadButtonTapped() {
+        spinner.show(in: view.view)
+        interactor.getImage(byID: view.id) { [weak self] downloadedImage in
+            spinner.dismiss()
+            guard let self = self else{return}
+            guard let downloadedImage = downloadedImage else{self.view.showErrorAlert();return}
+            UIImageWriteToSavedPhotosAlbum(downloadedImage, self, #selector(self.saveCompleted), nil)
+        }
+    }
+    
+    @objc func saveCompleted(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let _ = error {
+            view.showErrorAlert()
+        } else {
+            view.showSuccessAlert()
+        }
     }
     
     func likeButtonTapped() {

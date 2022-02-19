@@ -21,6 +21,8 @@ protocol AboutViewProtocol: UIViewController{
     func setDescriptionLabel(to description: String?)
     func setLocationLabel(to location: String?)
     func setDownloads(to downloads: Int?)
+    func showSuccessAlert()
+    func showErrorAlert()
 }
 
 protocol LikeEditingDelegate: AnyObject{
@@ -28,6 +30,18 @@ protocol LikeEditingDelegate: AnyObject{
 }
 
 class AboutView: UIViewController, AboutViewProtocol{
+    
+    lazy var downloadButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemBlue
+        button.tintColor = .white
+        button.setPreferredSymbolConfiguration(.init(pointSize: 25), forImageIn: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.setImage(.init(systemName: "square.and.arrow.down"), for: .normal)
+        button.addTarget(self, action: #selector(downloadButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     lazy var likeButton: UIButton = {
         let button = UIButton()
@@ -92,6 +106,7 @@ class AboutView: UIViewController, AboutViewProtocol{
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
         
     }()
@@ -112,8 +127,17 @@ class AboutView: UIViewController, AboutViewProtocol{
         self.id = id
         super.init(nibName: nil, bundle: nil)
     }
+    
     func setImageViewImage(toLink link: String){
         imageView.sd_setImage(with: URL(string: link))
+    }
+    
+    func showSuccessAlert() {
+        showAlert(withTitle: "Success", message: "Image was successfully saved to your photo album")
+    }
+    
+    func showErrorAlert() {
+        showAlert(withTitle: "Error", message: "Error is occurred when saving photo to album")
     }
     
     func setAuthorName(to name: String){
@@ -161,10 +185,10 @@ class AboutView: UIViewController, AboutViewProtocol{
                                                 .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
                                              ])
         let place = NSAttributedString(string: location,
-                                          attributes: [
-                                            .foregroundColor: UIColor.black,
-                                            .font: UIFont.systemFont(ofSize: 17, weight: .medium)
-                                          ])
+                                       attributes: [
+                                        .foregroundColor: UIColor.black,
+                                        .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+                                       ])
         let finalText = NSMutableAttributedString()
         finalText.append(description)
         finalText.append(place)
@@ -183,15 +207,15 @@ class AboutView: UIViewController, AboutViewProtocol{
                                                 .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
                                              ])
         let text = NSAttributedString(string: descriptionText,
-                                          attributes: [
-                                            .foregroundColor: UIColor.black,
-                                            .font: UIFont.systemFont(ofSize: 17, weight: .medium)
-                                          ])
+                                      attributes: [
+                                        .foregroundColor: UIColor.black,
+                                        .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+                                      ])
         let finalText = NSMutableAttributedString()
         finalText.append(description)
         finalText.append(text)
         descriptionLabel.attributedText = finalText
-
+        
     }
     
     func setDownloads(to downloads: Int?){
@@ -210,6 +234,10 @@ class AboutView: UIViewController, AboutViewProtocol{
         finalText.append(downloads)
         downloadsLabel.attributedText = finalText
         
+    }
+    
+    @objc func downloadButtonTapped(){
+        presenter.downloadButtonTapped()
     }
     
     @objc func likeButtonTapped(){

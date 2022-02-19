@@ -11,10 +11,12 @@ extension AboutView{
         stackView.spacing = 20
         stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(stackView)
         view.addSubview(likeButton)
-        
+        view.addSubview(downloadButton)
         view.addSubview(imageView)
+        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
             imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 25),
@@ -29,7 +31,12 @@ extension AboutView{
             likeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             likeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20),
             likeButton.heightAnchor.constraint(equalToConstant: 48),
-            likeButton.widthAnchor.constraint(equalToConstant: 48)
+            likeButton.widthAnchor.constraint(equalToConstant: 48),
+            
+            downloadButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            downloadButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            downloadButton.heightAnchor.constraint(equalToConstant: 48),
+            downloadButton.widthAnchor.constraint(equalToConstant: 48)
             
         ])
     }

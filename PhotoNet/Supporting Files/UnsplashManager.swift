@@ -4,6 +4,7 @@ struct UnsplashPhoto: Codable{
     let id: String
     let created_at: String
     let description: String?
+    let alt_description: String?
     let location: Location?
     let user: User
     let urls: URLS
@@ -11,6 +12,7 @@ struct UnsplashPhoto: Codable{
     struct URLS: Codable{
         let thumb: String
         let regular: String
+        let full: String
     }
     struct User: Codable{
         let name: String
