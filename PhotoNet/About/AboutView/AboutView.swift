@@ -18,6 +18,7 @@ protocol AboutViewProtocol: UIViewController{
     func setImageViewImage(toLink link: String)
     func setAuthorName(to name: String)
     func setDateLabel(to date: String)
+    func setDescriptionLabel(to description: String?)
     func setLocationLabel(to location: String?)
     func setDownloads(to downloads: Int?)
 }
@@ -47,6 +48,13 @@ class AboutView: UIViewController, AboutViewProtocol{
     }
     
     var likeListDelegate: LikeEditingDelegate?
+    
+    lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
     
     lazy var downloadsLabel: UILabel = {
         let label = UILabel()
@@ -143,21 +151,47 @@ class AboutView: UIViewController, AboutViewProtocol{
     }
     
     func setLocationLabel(to location: String?){
+        guard let location = location else {
+            locationLabel.removeFromSuperview()
+            return
+        }
         let description = NSAttributedString(string: "Location: ",
                                              attributes: [
                                                 .foregroundColor: UIColor.black,
                                                 .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
                                              ])
-        let location = NSAttributedString(string: location ?? "Some beautiful place...",
+        let place = NSAttributedString(string: location,
                                           attributes: [
                                             .foregroundColor: UIColor.black,
                                             .font: UIFont.systemFont(ofSize: 17, weight: .medium)
                                           ])
         let finalText = NSMutableAttributedString()
         finalText.append(description)
-        finalText.append(location)
+        finalText.append(place)
         locationLabel.attributedText = finalText
         
+    }
+    
+    func setDescriptionLabel(to description: String?) {
+        guard let descriptionText = description else {
+            descriptionLabel.removeFromSuperview()
+            return
+        }
+        let description = NSAttributedString(string: "Description: ",
+                                             attributes: [
+                                                .foregroundColor: UIColor.black,
+                                                .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
+                                             ])
+        let text = NSAttributedString(string: descriptionText,
+                                          attributes: [
+                                            .foregroundColor: UIColor.black,
+                                            .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+                                          ])
+        let finalText = NSMutableAttributedString()
+        finalText.append(description)
+        finalText.append(text)
+        descriptionLabel.attributedText = finalText
+
     }
     
     func setDownloads(to downloads: Int?){

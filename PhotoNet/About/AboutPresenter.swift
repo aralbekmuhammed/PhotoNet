@@ -38,6 +38,7 @@ class AboutPresenter: AboutPresenterProtocol{
                 $0.setDateLabel(to: String(photo.created_at.prefix(10)))
                 $0.setLocationLabel(to: photo.location?.title)
                 $0.setDownloads(to: photo.downloads)
+                $0.setDescriptionLabel(to: photo.description)
             }
         }
         let isLiked = interactor.checkIfDatabaseContains(id: view.id)

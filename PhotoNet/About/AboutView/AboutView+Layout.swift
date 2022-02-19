@@ -2,13 +2,14 @@ import UIKit
 extension AboutView{
     func configureView() {
         view.backgroundColor = .white
-        let stackView = UIStackView(arrangedSubviews: [authorNameLabel,
+        let stackView = UIStackView(arrangedSubviews: [descriptionLabel,
+                                                       authorNameLabel,
                                                        dateCreatedLabel,
                                                        locationLabel,
                                                        downloadsLabel])
         stackView.axis = .vertical
-        stackView.spacing = 25
-        stackView.distribution = .fillEqually
+        stackView.spacing = 20
+        stackView.distribution = .fillProportionally
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         view.addSubview(likeButton)

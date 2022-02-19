@@ -3,6 +3,7 @@ import Alamofire
 struct UnsplashPhoto: Codable{
     let id: String
     let created_at: String
+    let description: String?
     let location: Location?
     let user: User
     let urls: URLS
