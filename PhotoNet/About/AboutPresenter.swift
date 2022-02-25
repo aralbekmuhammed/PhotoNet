@@ -16,6 +16,7 @@ protocol AboutPresenterProtocol: AnyObject{
     func likeButtonTapped()
     func configureView()
     func downloadButtonTapped()
+    func imageViewTapped(withID id: String)
 }
 class AboutPresenter: NSObject, AboutPresenterProtocol{
     
@@ -81,6 +82,23 @@ class AboutPresenter: NSObject, AboutPresenterProtocol{
                 self.view.isLiked = self.interactor.checkIfDatabaseContains(id: self.view.id)
                 self.view.likeListDelegate?.likeListEdited()
             }
+        }
+    }
+    
+    func imageViewTapped(withID id: String) {
+        spinner.show(in: view.view)
+        interactor.getInformation(by: id) { [unowned self] unsplashPhoto in
+            spinner.dismiss()
+            if let unsplashPhoto = unsplashPhoto {
+                
+                let link = unsplashPhoto.urls.full
+                
+                router.presentViewer(withLink: link)
+                
+            }else{
+                view.showErrorAlert()
+            }
+            
         }
     }
     

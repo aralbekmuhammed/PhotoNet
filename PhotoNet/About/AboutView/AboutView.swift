@@ -82,6 +82,9 @@ class AboutView: UIViewController, AboutViewProtocol{
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 25
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                              action: #selector(imageTapped)))
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .lightGray
         return imageView
@@ -234,6 +237,10 @@ class AboutView: UIViewController, AboutViewProtocol{
         finalText.append(downloads)
         downloadsLabel.attributedText = finalText
         
+    }
+    
+    @objc func imageTapped(){
+        presenter.imageViewTapped(withID: id)
     }
     
     @objc func downloadButtonTapped(){

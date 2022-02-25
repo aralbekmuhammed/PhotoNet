@@ -41,6 +41,12 @@
 		A7436A4E27BE830200676F29 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7436A4627BE830200676F29 /* AboutView.swift */; };
 		A7436A5027BE830200676F29 /* AboutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7436A4327BE830200676F29 /* AboutRouter.swift */; };
 		A7436A5127BE830200676F29 /* AboutPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7436A4027BE830200676F29 /* AboutPresenter.swift */; };
+		A7474E3427C9158B008CF91A /* ViewerContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E2E27C9158B008CF91A /* ViewerContract.swift */; };
+		A7474E3527C9158B008CF91A /* ViewerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E2F27C9158B008CF91A /* ViewerPresenter.swift */; };
+		A7474E3627C9158B008CF91A /* ViewerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E3027C9158B008CF91A /* ViewerRouter.swift */; };
+		A7474E3727C9158B008CF91A /* ViewerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E3127C9158B008CF91A /* ViewerInteractor.swift */; };
+		A7474E3827C9158B008CF91A /* ViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E3227C9158B008CF91A /* ViewerView.swift */; };
+		A7474E3927C9158B008CF91A /* ViewerConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7474E3327C9158B008CF91A /* ViewerConfigurator.swift */; };
 		A76AB04627C0B19200495577 /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AB03127C0B19200495577 /* TableViewExtensions.swift */; };
 		A76AB04727C0B19200495577 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AB03327C0B19200495577 /* ColorExtensions.swift */; };
 		A76AB04827C0B19200495577 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76AB03527C0B19200495577 /* ImageExtensions.swift */; };
@@ -94,6 +100,12 @@
 		A7436A4327BE830200676F29 /* AboutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRouter.swift; sourceTree = "<group>"; };
 		A7436A4527BE830200676F29 /* AboutView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AboutView+Layout.swift"; sourceTree = "<group>"; };
 		A7436A4627BE830200676F29 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		A7474E2E27C9158B008CF91A /* ViewerContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerContract.swift; sourceTree = "<group>"; };
+		A7474E2F27C9158B008CF91A /* ViewerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerPresenter.swift; sourceTree = "<group>"; };
+		A7474E3027C9158B008CF91A /* ViewerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerRouter.swift; sourceTree = "<group>"; };
+		A7474E3127C9158B008CF91A /* ViewerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerInteractor.swift; sourceTree = "<group>"; };
+		A7474E3227C9158B008CF91A /* ViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerView.swift; sourceTree = "<group>"; };
+		A7474E3327C9158B008CF91A /* ViewerConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewerConfigurator.swift; sourceTree = "<group>"; };
 		A76AB03127C0B19200495577 /* TableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewExtensions.swift; sourceTree = "<group>"; };
 		A76AB03327C0B19200495577 /* ColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		A76AB03527C0B19200495577 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
@@ -163,6 +175,7 @@
 				A7436A3F27BE830200676F29 /* About */,
 				A7436A0327BE29E100676F29 /* Gallery */,
 				A7436A0227BE29B500676F29 /* Supporting Files */,
+				A7474E3A27C9158F008CF91A /* Viewer */,
 			);
 			path = PhotoNet;
 			sourceTree = "<group>";
@@ -284,6 +297,19 @@
 				A7436A4527BE830200676F29 /* AboutView+Layout.swift */,
 			);
 			path = AboutView;
+			sourceTree = "<group>";
+		};
+		A7474E3A27C9158F008CF91A /* Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				A7474E2E27C9158B008CF91A /* ViewerContract.swift */,
+				A7474E2F27C9158B008CF91A /* ViewerPresenter.swift */,
+				A7474E3027C9158B008CF91A /* ViewerRouter.swift */,
+				A7474E3127C9158B008CF91A /* ViewerInteractor.swift */,
+				A7474E3227C9158B008CF91A /* ViewerView.swift */,
+				A7474E3327C9158B008CF91A /* ViewerConfigurator.swift */,
+			);
+			path = Viewer;
 			sourceTree = "<group>";
 		};
 		A76AB02F27C0B19200495577 /* Extensions */ = {
@@ -508,7 +534,9 @@
 			files = (
 				A76AB04B27C0B19200495577 /* Button State.swift in Sources */,
 				A76AB04A27C0B19200495577 /* ButtonExtension.swift in Sources */,
+				A7474E3727C9158B008CF91A /* ViewerInteractor.swift in Sources */,
 				A7436A3027BE7B5A00676F29 /* FavouritesInteractor.swift in Sources */,
+				A7474E3927C9158B008CF91A /* ViewerConfigurator.swift in Sources */,
 				A76AB04927C0B19200495577 /* PhoneNumberExtenisons.swift in Sources */,
 				A7436A2E27BE7B2700676F29 /* FavouritesView.swift in Sources */,
 				A7436A0727BE29FD00676F29 /* GalleryView.swift in Sources */,
@@ -525,6 +553,7 @@
 				A7436A2B27BE740B00676F29 /* FavouritesConfigurator.swift in Sources */,
 				A7436A3727BE7CF600676F29 /* FavouriteTVC.swift in Sources */,
 				A7436A4A27BE830200676F29 /* AboutConfigurator.swift in Sources */,
+				A7474E3527C9158B008CF91A /* ViewerPresenter.swift in Sources */,
 				A7436A3227BE7B8500676F29 /* FavouritesPresenter.swift in Sources */,
 				A7436A4B27BE830200676F29 /* AboutView+Layout.swift in Sources */,
 				A7436A2327BE4BFB00676F29 /* GalleryView+CollectionView.swift in Sources */,
@@ -541,11 +570,14 @@
 				A7436A0927BE2A0700676F29 /* GalleryInteractor.swift in Sources */,
 				A7436A0E27BE2A3300676F29 /* GalleryRouter.swift in Sources */,
 				A76AB04E27C0B19200495577 /* ViewControllerExtension.swift in Sources */,
+				A7474E3427C9158B008CF91A /* ViewerContract.swift in Sources */,
 				A76AB04D27C0B19200495577 /* StringExtensions.swift in Sources */,
 				A7436A1C27BE444A00676F29 /* PhotoCVC.swift in Sources */,
+				A7474E3827C9158B008CF91A /* ViewerView.swift in Sources */,
 				A7436A0B27BE2A1000676F29 /* GalleryPresenter.swift in Sources */,
 				A7436A2727BE533700676F29 /* GalleryView+CollectionViewLayout.swift in Sources */,
 				A7436A3927BE7D1B00676F29 /* FavouritesView+TableVIew.swift in Sources */,
+				A7474E3627C9158B008CF91A /* ViewerRouter.swift in Sources */,
 				A7436A5127BE830200676F29 /* AboutPresenter.swift in Sources */,
 				A74369E327BE25E900676F29 /* SceneDelegate.swift in Sources */,
 				A76AB04727C0B19200495577 /* ColorExtensions.swift in Sources */,
