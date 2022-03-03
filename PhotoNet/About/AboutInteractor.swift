@@ -31,7 +31,7 @@ class AboutInteractor: AboutInteractorProtocol{
     func getImage(byID id: String, completionHandler: @escaping (UIImage?) -> ()) {
         getInformation(by: id) { photo in
             guard let photo = photo,
-                  let url = URL(string: photo.urls.full) else{completionHandler(nil); return}
+                  let url = URL(string: photo.links.download) else{completionHandler(nil); return}
             DispatchQueue.global(qos: .userInitiated).async {
                 guard let data = try? Data(contentsOf: url) else{
                     DispatchQueue.main.async {

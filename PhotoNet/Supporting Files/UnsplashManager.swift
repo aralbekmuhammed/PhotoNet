@@ -13,7 +13,11 @@ struct UnsplashPhoto: Codable{
     }
     let user: User
     let urls: URLS
+    let links: Links
     let downloads: Int?
+    struct Links: Codable{
+        let download: String
+    }
     struct URLS: Codable{
         let thumb: String
         let regular: String
