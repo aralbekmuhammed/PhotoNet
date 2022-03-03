@@ -19,12 +19,20 @@ class ViewerPresenter: ViewerPresenterProtocol {
     
     func configureView() {
         view.configureView()
-        view.setImageViewImage(toLink: view.imageLink) { [unowned self] success in
-            
-            if !success{
-                view.showErrorAlert()
+        
+        view.showSpinner()
+        
+        let link = view.imageLink
+        interactor.getImage(from: link) { [unowned self] downloadedImage in
+            DispatchQueue.main.async {
+                
+                view.dismissSpinner()
+                
+                guard let image = downloadedImage else { view.showErrorAlert(); return }
+                
+                view.setImageViewImage(to: image)
+                
             }
-            
         }
     }
     

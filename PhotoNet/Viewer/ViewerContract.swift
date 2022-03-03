@@ -16,15 +16,19 @@ protocol ViewerViewProtocol: UIViewController {
     var imageLink: String { get }
     var imageView: UIImageView { get }
     
-    func setImageViewImage(toLink link: String, completionHandler: @escaping(Bool)->())
+    func setImageViewImage(to image: UIImage)
     func configureView()
     func showErrorAlert()
+    func showSpinner()
+    func dismissSpinner()
 }
 
 
 // MARK: - Interactor
 protocol ViewerInteractorProtocol: AnyObject {
     var presenter: ViewerPresenterProtocol! { get set }
+    
+    func getImage(from link: String, completionHandler: @escaping(UIImage?) -> ())
 }
 
 

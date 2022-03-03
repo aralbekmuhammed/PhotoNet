@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class ViewerView: UIViewController, ViewerViewProtocol {
     
@@ -15,10 +16,12 @@ class ViewerView: UIViewController, ViewerViewProtocol {
     
     var imageLink: String
     
+    let spinner = JGProgressHUD(style: .light)
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .black.withAlphaComponent(0.9)
+        imageView.backgroundColor = .black.withAlphaComponent(0.95)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -39,14 +42,9 @@ class ViewerView: UIViewController, ViewerViewProtocol {
         presenter.configureView()
     }
     
-    func setImageViewImage(toLink link: String, completionHandler: @escaping(Bool) -> ()) {
+    func setImageViewImage(to image: UIImage) {
         
-        imageView.sd_setImage(with: URL(string: link)) { image, _, _, _ in
-            let success = image != nil
-            
-            completionHandler(success)
-
-        }
+        imageView.image = image
         
     }
     
@@ -64,6 +62,14 @@ class ViewerView: UIViewController, ViewerViewProtocol {
     
     @objc private func didTapOrSwipe(){
         presenter.viewDidTapOrSwipe()
+    }
+    
+    func showSpinner() {
+        self.spinner.show(in: view)
+    }
+    
+    func dismissSpinner() {
+        self.spinner.dismiss()
     }
     
     func configureView() {
