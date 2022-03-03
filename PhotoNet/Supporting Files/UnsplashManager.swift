@@ -6,6 +6,11 @@ struct UnsplashPhoto: Codable{
     let description: String?
     let alt_description: String?
     let location: Location?
+    let width: Int
+    let height: Int
+    var resolution: String{
+        "\(width) x \(height)"
+    }
     let user: User
     let urls: URLS
     let downloads: Int?

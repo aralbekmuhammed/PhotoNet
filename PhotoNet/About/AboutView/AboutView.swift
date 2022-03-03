@@ -22,6 +22,7 @@ protocol AboutViewProtocol: UIViewController{
     func setLocationLabel(to location: String?)
     func setDownloads(to downloads: Int?)
     func showSuccessAlert()
+    func setResolution(to resolution: String)
     func showErrorAlert()
 }
 
@@ -62,6 +63,13 @@ class AboutView: UIViewController, AboutViewProtocol{
     }
     
     var likeListDelegate: LikeEditingDelegate?
+    
+    lazy var resolutionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -237,6 +245,24 @@ class AboutView: UIViewController, AboutViewProtocol{
         finalText.append(downloads)
         downloadsLabel.attributedText = finalText
         
+    }
+    
+    func setResolution(to resolution: String){
+        let description = NSAttributedString(string: "Resolution: ",
+                                             attributes: [
+                                                .foregroundColor: UIColor.black,
+                                                .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
+                                             ])
+        let resolutionText = NSAttributedString(string: resolution,
+                                                attributes: [
+                                                    .foregroundColor: UIColor.black,
+                                                    .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+                                                ])
+        let finalText = NSMutableAttributedString()
+        finalText.append(description)
+        finalText.append(resolutionText)
+        resolutionLabel.attributedText = finalText
+
     }
     
     @objc func imageTapped(){

@@ -3,6 +3,7 @@ extension AboutView{
     func configureView() {
         view.backgroundColor = .white
         let stackView = UIStackView(arrangedSubviews: [descriptionLabel,
+                                                       resolutionLabel,
                                                        authorNameLabel,
                                                        dateCreatedLabel,
                                                        locationLabel,

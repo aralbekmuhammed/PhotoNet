@@ -40,6 +40,7 @@ class AboutPresenter: NSObject, AboutPresenterProtocol{
                 $0.setLocationLabel(to: photo.location?.title)
                 $0.setDownloads(to: photo.downloads)
                 $0.setDescriptionLabel(to: photo.description ?? photo.alt_description)
+                $0.setResolution(to: photo.resolution)
             }
         }
         let isLiked = interactor.checkIfDatabaseContains(id: view.id)
